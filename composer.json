@@ -1,0 +1,18 @@
+{
+    "name": "grooveround/image",
+    "description": "Image manipulation support. Allows images to be resize, cropped, etc.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Derick Fynn",
+            "email": "dcfynn@vodamail.co.za"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "grooveround\\image\\": ""
+        }
+    }
+}
