@@ -8,7 +8,7 @@
             "email": "dcfynn@vodamail.co.za"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {},
     "autoload": {
         "psr-4": {
