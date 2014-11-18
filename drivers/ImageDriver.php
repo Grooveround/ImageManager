@@ -1,12 +1,12 @@
 <?php
 namespace grooveround\image\drivers;
 
-use grooveround\image\helpers\ResizingConstraint;
+use grooveround\image\helpers\OptimizerConstant;
 
 /**
  * Interface ImageDriver
  * @package grooveround\image\drivers
- * @author Deick Fynn <dcfynn@vodamail.co.za>
+ * @author Derick Fynn <dcfynn@vodamail.co.za>
  */
 interface ImageDriver
 {
@@ -16,26 +16,26 @@ interface ImageDriver
      *
      * usage:
      *     Resize to 100 pixels on the shortest side
-     *     $image->resize(100, 100, ResizingConstraint::AUTO);
+     *     $image->resize(100, 100, OptimizerConstant::AUTO);
      *
      *     Resize to 100x100 pixels, keeping aspect ratio
-     *     $image->resize(100, 100, ResizingConstraint::INVERSE);
+     *     $image->resize(100, 100, OptimizerConstant::INVERSE);
      *
      *     Resize to 900 pixel width, keeping aspect ratio
-     *     $image->resize(600, null, ResizingConstraint::AUTO);
+     *     $image->resize(600, null, OptimizerConstant::AUTO);
      *
      *     Resize to 600 pixel height, keeping aspect ratio
-     *     $image->resize(null, 600, ResizingConstraint::AUTO);
+     *     $image->resize(null, 600, OptimizerConstant::AUTO);
      *
      *     Resize to 200x500 pixels, ignoring aspect ratio
-     *     $image->resize(200, 500, ResizingConstraint::NONE);
+     *     $image->resize(200, 500, OptimizerConstant::NONE);
      *
      * @param int $width
      * @param int $height
      * @param int $constrain
      * @return mixed
      */
-    public function resize($width = 0, $height = 0, $constrain = ResizingConstraint::AUTO);
+    public function resize($width = 0, $height = 0, $constrain = OptimizerConstant::AUTO);
 
     /**
      * Crop an image to the given size. Either the width or the height can be
@@ -48,10 +48,10 @@ interface ImageDriver
      *     Crop the image to 200x200 pixels, from the center
      *     $image->crop(200, 200);
      *
-     * @param   int $width new width
-     * @param   int $height new height
-     * @param   int $offsetX offset from the left
-     * @param   int $offsetY offset from the top
+     * @param int $width
+     * @param int $height
+     * @param int $offsetX
+     * @param int $offsetY
      * @return  void
      */
     public function crop($width, $height, $offsetX = 0, $offsetY = 0);
@@ -66,7 +66,7 @@ interface ImageDriver
      *     Rotate 90% counter-clockwise
      *     $image->rotate(-90);
      *
-     * @param   int $degrees degrees to rotate
+     * @param int $degrees
      * @return  bool
      */
     public function rotate($degrees);
@@ -76,12 +76,12 @@ interface ImageDriver
      *
      * usage:
      *     Flip the image from top to bottom
-     *     $image->flip(ResizingConstraint::HORIZONTAL);
+     *     $image->flip(OptimizerConstant::HORIZONTAL);
      *
      *     Flip the image from left to right
-     *     $image->flip(ResizingConstraint::VERTICAL);
+     *     $image->flip(OptimizerConstant::VERTICAL);
      *
-     * @param   int $direction direction to flip
+     * @param int $direction
      * @return  bool
      */
     public function flip($direction);
@@ -93,10 +93,10 @@ interface ImageDriver
      *     Sharpen the image by 20%
      *     $image->sharpen(20);
      *
-     * @param   int $amount amount to sharpen
+     * @param int $value
      * @return  void
      */
-    public function sharpen($amount);
+    public function sharpen($value);
 
     /**
      * Add a reflection to an image. The most opaque part of the reflection
@@ -116,9 +116,9 @@ interface ImageDriver
      * note: The reflection will be go from transparent at the top
      * to opaque at the bottom, by default
      *
-     * @param   int $height reflection height
-     * @param   int $opacity reflection opacity
-     * @param   boolean $fadeIn TRUE to fade out, FALSE to fade in
+     * @param int $height
+     * @param int $opacity
+     * @param bool $fadeIn
      * @return  void
      */
     public function reflection($height, $opacity, $fadeIn);
@@ -135,11 +135,11 @@ interface ImageDriver
      *     $mark = new Image('upload/watermark.png');
      *     $image->watermark($mark, true, true);
      *
-     * @param   Image $image watermarking Image
-     * @param   int $offsetX offset from the left
-     * @param   int $offsetY offset from the top
-     * @param   int $opacity opacity of watermark
-     * @return  void
+     * @param Image $image
+     * @param int $offsetX
+     * @param int $offsetY
+     * @param int $opacity
+     * @return void
      */
     public function watermark(Image $image, $offsetX, $offsetY, $opacity);
 
@@ -154,10 +154,10 @@ interface ImageDriver
      *     Make the image background black with 50% opacity
      *     $image->background('#00000', 50);
      *
-     * @param   int $red red channel
-     * @param   int $green green channel
-     * @param   int $blue blue channel
-     * @param   int $opacity opacity
+     * @param int $red
+     * @param int $green
+     * @param int $blue
+     * @param int $opacity
      * @return void
      */
     public function background($red, $green, $blue, $opacity);
@@ -173,9 +173,9 @@ interface ImageDriver
      *     Overwrite the original image
      *     $image->save();
      *
-     * @param   string $filePath new image filename
-     * @param   int $quality quality
-     * @return  boolean
+     * @param string $filePath
+     * @param int $quality
+     * @return  bool
      */
     public function save($filePath = null, $quality);
 
@@ -189,8 +189,8 @@ interface ImageDriver
      *     Render the image as a PNG
      *     $data = $image->render('png');
      *
-     * @param   string $type image type: png, jpg, gif, etc
-     * @param   int $quality quality
+     * @param string $type
+     * @param int $quality
      * @return  string
      */
     public function render($type, $quality);

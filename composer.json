@@ -1,6 +1,6 @@
 {
     "name": "grooveround/image",
-    "description": "Image manipulation support. Allows images to be resize, cropped, etc.",
+    "description": "Image optimizer, Cropper and Modifier",
     "license": "MIT",
     "authors": [
         {

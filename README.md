@@ -1,5 +1,7 @@
 Image Manager for PHP using GD, Imagick, etc
 =======================
+Image optimizer, Cropper and Modifier
+
 Usage Example:
 
 Instantiation:
@@ -25,7 +27,7 @@ Resize:
 ~~~
 
     // Resize to 100 pixels on the shortest side
-    $image->resize(100, 100, ResizingConstraint::AUTO);
+    $imageManager->resizeImage(100, 100, OptimizerConstant::AUTO);
 
 ~~~
 
@@ -35,7 +37,7 @@ Crop:
 ~~~
 
     // Crop the image to 200x200 pixels, from the center
-    $image->crop(200, 200);
+    $imageManager->cropImage(200, 200);
 
 ~~~
 
@@ -45,7 +47,7 @@ Rotate:
 ~~~
 
     // Rotate 90% counter-clockwise
-    $image->rotate(-90);
+    $imageManager->rotateImage(-90);
 
 ~~~
 
@@ -55,11 +57,11 @@ Flip:
 
 ~~~
 
-     //Flip the image from top to bottom
-     $image->flip(ResizingConstraint::HORIZONTAL);
+    //Flip the image from top to bottom
+    $imageManager->flipImage(OptimizerConstant::HORIZONTAL);
 
-     //Flip the image from left to right
-     $image->flip(ResizingConstraint::VERTICAL);
+    //Flip the image from left to right
+    $imageManager->flipImage(OptimizerConstant::VERTICAL);
 
 ~~~
 

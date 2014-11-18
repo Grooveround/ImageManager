@@ -7,7 +7,7 @@ use Exception;
 /**
  * Class BaseImageDriver
  * @package grooveround\image\drivers
- * @author Deick Fynn <dcfynn@vodamail.co.za>
+ * @author Derick Fynn <dcfynn@vodamail.co.za>
  */
 abstract class BaseImage
 {
@@ -21,46 +21,46 @@ abstract class BaseImage
 
     /**
      * Width of the image
-     * @var integer width
+     * @var int width
      */
     protected $width;
 
     /**
      * Height of the image
-     * @var integer height
+     * @var int height
      */
     protected $height;
 
     /**
      * Type of image
-     * @var integer type
+     * @var string fileExtension
      */
     protected $fileExtension;
 
     /**
      * Image mime type
-     * @var string  mime
+     * @var string  mimeType
      */
     protected $mimeType;
 
     /**
-     * Loads information about the image. Will throw an exception if the image
-     * does not exist or is not an image.
-     * @param string $file image file path
+     * Loads information about the image
+     *
+     * @param string $filePath
      * @throws \Exception
      */
-    public function __construct($file)
+    public function __construct($filePath)
     {
         try {
             // Get the real path to the file
-            $file = realpath($file);
+            $filePath = realpath($filePath);
 
             // Get the image information
-            $info = getimagesize($file);
-            if (empty($file) || empty($info)) {
+            $info = getimagesize($filePath);
+            if (empty($filePath) || empty($info)) {
                 throw new Exception;
             }
-            $this->setImageData($file, $info);
+            $this->setImageData($filePath, $info);
         } catch (Exception $e) {
             // Ignore all errors while reading the image
         }
@@ -69,12 +69,12 @@ abstract class BaseImage
     /**
      * Store the image information
      *
-     * @param string $file
+     * @param string $filePath
      * @param array $info
      */
-    protected function setImageData($file, array $info)
+    protected function setImageData($filePath, array $info)
     {
-        $this->filePath = $file;
+        $this->filePath = $filePath;
         list($this->width, $this->height, $this->fileExtension) = $info;
         $this->width = max(round($this->width), 1);
         $this->height = max(round($this->height), 1);

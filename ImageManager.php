@@ -2,11 +2,12 @@
 namespace grooveround\image;
 
 use grooveround\image\drivers\ImageDriver;
+use grooveround\image\helpers\OptimizerConstant;
 
 /**
  * Class ImageManager
  * @package grooveround\image
- * @author Deick Fynn <dcfynn@vodamail.co.za>
+ * @author Derick Fynn <dcfynn@vodamail.co.za>
  */
 class ImageManager
 {
@@ -16,6 +17,8 @@ class ImageManager
     private $drivers = [];
 
     /**
+     * Adds Image driver instance
+     *
      * @param string $identifier
      * @param ImageDriver $driver
      * @return $this
@@ -29,6 +32,8 @@ class ImageManager
     }
 
     /**
+     * Retrieve image driver instance
+     *
      * @param string $identifier
      * @return mixed|bool|ImageDriver
      */
@@ -43,32 +48,39 @@ class ImageManager
     }
 
     /**
-     * @param $driver
-     * @param $width
-     * @param $height
+     * Resize image
+     *
+     * @param string $driver
+     * @param int $width
+     * @param int $height
+     * @param int $constrain
      */
-    public function resizeImage($driver, $width, $height)
+    public function resizeImage($driver, $width = 0, $height = 0, $constrain = OptimizerConstant::AUTO)
     {
-        $this->getDriver($driver)->resize($width, $height);
+        $this->getDriver($driver)->resize($width, $height, $constrain);
     }
 
     /**
-     * @param $driver
-     * @param $width
-     * @param $height
-     * @param $offsetX
-     * @param $offsetY
+     * Crops image
+     *
+     * @param string $driver
+     * @param int $width
+     * @param int $height
+     * @param int $offsetX
+     * @param int $offsetY
      * @return $this
      */
-    public function cropImage($driver, $width, $height, $offsetX, $offsetY)
+    public function cropImage($driver, $width, $height, $offsetX = 0, $offsetY = 0)
     {
         $this->getDriver($driver)->crop($width, $height, $offsetX, $offsetY);
         return $this;
     }
 
     /**
-     * @param $driver
-     * @param $degrees
+     * Rotates image
+     *
+     * @param string $driver
+     * @param int $degrees
      * @return $this
      */
     public function rotateImage($driver, $degrees)
@@ -78,8 +90,10 @@ class ImageManager
     }
 
     /**
-     * @param $driver
-     * @param $direction
+     * Flips image
+     *
+     * @param string $driver
+     * @param int $direction
      * @return $this
      */
     public function flipImage($driver, $direction)
@@ -89,8 +103,10 @@ class ImageManager
     }
 
     /**
-     * @param $driver
-     * @param $path
+     * Saves image
+     *
+     * @param string $driver
+     * @param string $path
      * @param int $quality
      */
     public function saveImage($driver, $path, $quality = 100)
